@@ -1,0 +1,30 @@
+.bannerfoto1 {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(46, 49, 53, 0.212),
+      rgba(23, 23, 23, 0.87)
+    ),
+    url("../../../public/banner.jpg");
+  background-position: top;
+  background-size: cover;
+  object-fit: cover;
+  max-height: 700px;
+}
+
+.bannerfoto2 {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(46, 49, 53, 0.212),
+      rgba(23, 23, 23, 0.87)
+    ),
+    url("../../../public/banner2.jpg");
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+div.swiper-slide {
+  display: grid;
+  justify-content: center;
+}
