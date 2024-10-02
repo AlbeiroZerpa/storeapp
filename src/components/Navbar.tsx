@@ -1,31 +1,35 @@
 import { useState } from "react";
-import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { ShoppingCart } from "./ShoppingCart";
+import { Profile } from "./Profile";
 
 export const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const [iconProfile, setIconProfile] = useState(false);
+  const [scrollValue, setscrollValue] = useState(0);
 
   const handleToggle = (): void => {
     setToggle(!toggle);
   };
 
-  const handleProfile = (): void => {
-    setIconProfile(!iconProfile);
+  window.onscroll = function () {
+    if (window.scrollY >= 100) {
+      setscrollValue(window.scrollY);
+    } else {
+      setscrollValue(window.scrollY);
+    }
   };
-
   return (
     <>
-      <nav className="absolute w-full z-20 flex items-center justify-between flex-wrap bg-transparent p-6">
+      <nav
+        className={`${
+          scrollValue >= 100 ? "fixed bg-stone-900" : "absolute bg-transparent"
+        } transition-all ease-in-out	duration-100 w-full z-20 flex items-center justify-between flex-wrap p-6`}
+      >
         <div className="flex items-center  text-white lg:mr-6">
           <img
             src="../../public/logo.png"
-            className="fill-current h-8 w-20 mr-2"
+            className="fill-current h-8 w-28 mr-2"
           />
-        </div>
-        <div className="block lg:hidden">
-          <MdAccountCircle className="size-8 text-white hover:text-gray-300 transition ease-in-out delay-50 active:text-gray-500" />
         </div>
         <div className="block lg:hidden">
           <button
@@ -71,33 +75,9 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="hidden lg:block">
-          <div className="relative group">
-            <div>
-              <MdAccountCircle
-                className="size-8 text-white hover:text-gray-300 transition ease-in-out delay-50 active:text-gray-500"
-                onClick={handleProfile}
-              />
-            </div>
-            <div
-              className={`absolute overflow-hidden rounded-md transition ease-in-out delay-75 ${
-                iconProfile == false
-                  ? "max-h-0 opacity-0 translate-y-0"
-                  : "max-h-96 opacity-100 z-20 translate-y-2"
-              } bg-gray-200 right-0 group-hover:block`}
-            >
-              <div className="dropdown-menu w-40">
-                <ul className="list-none text-center py-2 hover:bg-stone-700 hover:rounded-md hover:text-white hover:transition ease-in-out delay-75">
-                  <Link to="ProfileConfig">
-                    <button onClick={handleProfile}>Iniciar Sesión</button>
-                  </Link>
-                </ul>
-                <ul className="list-none text-center py-2 hover:bg-stone-700 hover:rounded-md hover:text-white hover:transition ease-in-out delay-75">
-                  <Link to="/">
-                    <button onClick={handleProfile}>Salir</button>
-                  </Link>
-                </ul>
-              </div>
-            </div>
+          <div className="flex">
+            <ShoppingCart />
+            <Profile />
           </div>
         </div>
       </nav>
